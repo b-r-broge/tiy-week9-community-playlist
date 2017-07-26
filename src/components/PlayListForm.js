@@ -40,7 +40,7 @@ class PlayListForm extends Component {
     return (
       <form className="songInput" onSubmit={this.addToList}>
         <label htmlFor="username">User Name:</label>
-        <input type="text" name="username" id="username" value="" placeholder="Name or User Name"> </input>
+        <input type="text" name="username" id="username" value="" placeholder="Name or User Name" />
 
         <label htmlFor="artist">Artist/Band:</label>
         <input type="text" name="artist" id="artist" value="" placeholder="Artist or Band Name" />
