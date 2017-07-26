@@ -38,15 +38,19 @@ class PlayListForm extends Component {
 
   render() {
     return (
-      <form className="songInput" action="index.html" method="post">
+      <form className="songInput" onSubmit={this.addToList}>
         <label htmlFor="username">User Name:</label>
-        <input type="text" name="username" id="username" value="" placeholder="Name or User Name" />
+        <input type="text" name="username" id="username" value="" placeholder="Name or User Name"> </input>
+
         <label htmlFor="artist">Artist/Band:</label>
         <input type="text" name="artist" id="artist" value="" placeholder="Artist or Band Name" />
+
         <label htmlFor="song-title">Song Title:</label>
         <input type="text" name="song-title" id="song-title" value="" placeholder="Song Title" />
+
         <label htmlFor="song-notes">Notes about the Song:</label>
-        <textarea name="song-notes" id="song-notes" rows="4" cols="80" />
+        <textarea name="song-notes" id="song-notes" rows="3" cols="40" />
+
         <button type="submit" name="submit">Submit</button>
       </form>
 

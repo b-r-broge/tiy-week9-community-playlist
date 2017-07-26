@@ -4,8 +4,9 @@ class NavBar extends Component {
 
   render() {
     return (
-
-      <h6> navbar </h6>
+      <div className="navbar">
+        <h6> Bradford's playlist sharing service </h6>
+      </div>
     )
   }
 }

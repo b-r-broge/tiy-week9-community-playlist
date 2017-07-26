@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from '../logo.svg';
+// import logo from '../logo.svg';
 import '../styles/App.css';
 import NavBar from './NavBar';
 import PlayList from './PlayList';
@@ -10,8 +10,10 @@ class App extends Component {
     return (
       <div className="App">
         <NavBar />
-        <PlayListForm />
-        <PlayList />
+        <div className="mainbody">
+          <PlayListForm />
+          <PlayList />
+        </div>
       </div>
     );
   }
