@@ -6,28 +6,37 @@ class PlayListForm extends Component {
     super(props);
 
     this.addToList = this.addToList.bind(this);
+    this.handleChange = this.handleChange.bind(this);
 
-    this.state = {};
+    this.state = {
+      userName: "",
+      songTitle: "",
+      songArtist: "",
+      songNotes: ""
+    };
   }
 
   //In your PlayListForm component you should have a addToList function that happens
   //when the htmlForm is submitted.
   //This expression or method (dependin on the syntax you choose) will be comparable to this:
 
-  addToList = (e) => {
-      e.preventDefault();
-      this.setState({userName: e.target.value, songTitle: e.target.value, songArtist: e.target.value, songNotes: e.target.value});
-      let listItem = JSON.stringify(this.state);
+  handleChange = (e) => {
+    this.setState({[e.target.name]: e.target.value})
+  }
 
-      fetch("https://tiny-lasagna-server.herokuapp.com/collections/playlisting", {
-        method: "POST",
-        body: listItem,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
+  addToList = (e) => {
+    e.preventDefault();
+    let listItem = JSON.stringify(this.state);
+
+    fetch("https://tiny-lasagna-server.herokuapp.com/collections/playlisting", {
+      method: "POST",
+      body: listItem,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       }
-    }
-    ).then(response => {
+    })
+    .then(response => {
       console.log(response, "yay");
 
     }).catch(err => {
@@ -40,16 +49,16 @@ class PlayListForm extends Component {
     return (
       <form className="songInput" onSubmit={this.addToList}>
         <label htmlFor="username">User Name:</label>
-        <input type="text" name="username" id="username" value="" placeholder="Name or User Name" />
+        <input type="text" name="userName" id="username" value={this.state.userName} onChange={this.handleChange} placeholder="Name or User Name" />
 
         <label htmlFor="artist">Artist/Band:</label>
-        <input type="text" name="artist" id="artist" value="" placeholder="Artist or Band Name" />
+        <input type="text" name="songArtist" id="artist" value={this.state.songArtist} onChange={this.handleChange} placeholder="Artist or Band Name" />
 
         <label htmlFor="song-title">Song Title:</label>
-        <input type="text" name="song-title" id="song-title" value="" placeholder="Song Title" />
+        <input type="text" name="songTitle" id="song-title" value={this.state.songTitle} onChange={this.handleChange} placeholder="Song Title" />
 
         <label htmlFor="song-notes">Notes about the Song:</label>
-        <textarea name="song-notes" id="song-notes" rows="3" cols="40" />
+        <textarea name="songNotes" id="song-notes" value={this.state.songNotes} onChange={this.handleChange} rows="3" cols="40" />
 
         <button type="submit" name="submit">Submit</button>
       </form>

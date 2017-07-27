@@ -7,36 +7,36 @@ class PlayList extends Component {
 
     // bind fetchData to this
     this.fetchData = this.fetchData.bind(this);
+    this.makeFetch = this.makeFetch.bind(this);
 
     this.state = {
       songs: []
     }
   }
 
-  componentDidMount() {
+  makeFetch = () => {
     fetch('https://tiny-lasagna-server.herokuapp.com/collections/playlisting')
     .then(results => {
       return results.json();
     }).then(data => {
       this.setState({songs: data});
-      // console.log("state", this.state.songs);
     })
+  }
+
+  componentDidMount() {
+    return this.makeFetch()
   }
 
   fetchData = (e) => {
     e.preventDefault();
-    fetch('https://tiny-lasagna-server.herokuapp.com/collections/playlisting')
-    .then(results => {
-      return results.json();
-    }).then(data => {
-      this.setState({songs: data});
-    })
+    return this.makeFetch()
   }
 
 
   render() {
     return (
       <div className="playlist">
+        <button onClick={this.fetchData}> Refresh Playlist </button>
         <PlayListItem songs={this.state.songs} />
       </div>
     )
